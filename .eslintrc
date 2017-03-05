@@ -1,0 +1,18 @@
+{
+  "extends": "airbnb",
+  "globals": {
+    "angular": true,
+    "moment": true,
+    "_": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-console": 0,
+    "no-alert": 0,
+    "no-param-reassign": ["error", { "props": false }],
+    "import/no-dynamic-require": "off",
+    "eqeqeq": ["error", "allow-null"]
+  }
+}
