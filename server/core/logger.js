@@ -26,6 +26,6 @@ export default (app) => {
     });
   }
   log4js.configure(logConfig);
-  app.ctx.logger = log4js.getLogger('console');
   app.use(log4js.connectLogger(log4js.getLogger('express'), { level: 'debug', format: defaultFormat }));
+  return log4js.getLogger('console');
 };

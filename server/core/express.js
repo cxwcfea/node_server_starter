@@ -4,14 +4,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
+import mountRoutes from 'mount-routes';
+import requireDirectory from 'require-directory';
 import logger from './logger';
 import sendJson from '../middlewares/sendJson';
+import auth from '../core/passport';
+import util from '../utils/util';
 
 export default (config) => {
   const app = express();
 
-  app.ctx = {};
   app.set('json spaces', 4);
+  app.set('trust proxy', config.trustProxy || false);
   app.use(helmet());
   app.use(compression());
   app.use(bodyParser.json());
@@ -19,12 +23,25 @@ export default (config) => {
   app.use(bodyParser.raw());
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
-
-  logger(app);
   app.use(sendJson);
 
-  app.get('/test', (req, res) => {
-    res.sendJsonResponse({ name: 'ok' });
+  serverContext.errorCode = {
+    MongoError: 4001,
+  };
+  serverContext.logger = logger(app);
+  serverContext.ctrls = util.loadModules(requireDirectory(module, '../controllers'));
+  serverContext.mongoModels = util.loadModules(requireDirectory(module, '../models/mongo'));
+  serverContext.auth = auth(app);
+
+  mountRoutes(app, path.join(__dirname, '..', 'routes'), false);
+
+  app.use((req, res) => {
+    res.sendJsonError('Not Found!', 404);
+  });
+
+  app.use((err, req, res) => {
+    serverContext.logger.error(err.stack);
+    res.sendJsonError(err.message || 'Internal Server Error!', err.status || 500);
   });
 
   return app;
