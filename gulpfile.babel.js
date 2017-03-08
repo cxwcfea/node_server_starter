@@ -18,7 +18,16 @@ gulp.task('nodemon', () => {
 gulp.task('release', () => {
   gulp.src('server/**/*.js')
     .pipe(babel({
-      presets: ['es2015'],
+      presets: ['es2015', 'es2017'],
+      plugins: [
+        [
+          'transform-runtime',
+          {
+            polyfill: false,
+            regenerator: true,
+          },
+        ],
+      ],
     }))
     .pipe(gulp.dest('dist'));
 });

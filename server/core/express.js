@@ -30,6 +30,7 @@ export default (config) => {
   };
   serverContext.logger = logger(app);
   serverContext.ctrls = util.loadModules(requireDirectory(module, '../controllers'));
+  serverContext.services = util.loadModules(requireDirectory(module, '../services'));
   serverContext.mongoModels = util.loadModules(requireDirectory(module, '../models/mongo'));
   serverContext.auth = auth(app);
 

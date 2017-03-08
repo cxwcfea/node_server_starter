@@ -10,8 +10,8 @@
     "react"
   ],
   "rules": {
-    "no-console": 0,
-    "no-alert": 0,
+    "no-console": "off",
+    "no-plusplus": "off",
     "no-param-reassign": ["error", { "props": false }],
     "import/no-dynamic-require": "off",
     "class-methods-use-this": "off",
