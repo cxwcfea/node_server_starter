@@ -14,7 +14,7 @@ import util from '../utils/util';
 export default (config) => {
   const app = express();
 
-  app.set('json spaces', 4);
+  app.set('json spaces', 2);
   app.set('trust proxy', config.trustProxy || false);
   app.use(helmet());
   app.use(compression());
