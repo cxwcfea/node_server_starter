@@ -5,7 +5,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 let auth = null;
 
-function initPassport(app) {
+function initPassport() {
   passport.use(new LocalStrategy(
     {
       usernameField: 'name',
@@ -47,7 +47,7 @@ function initPassport(app) {
 export default (app) => {
   if (!auth) {
     app.use(passport.initialize());
-    initPassport(app);
+    initPassport();
     auth = {
       login(req, res, next) {  // TODO: use req.params
         if (!req.body.name || !req.body.password) {

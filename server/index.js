@@ -1,3 +1,5 @@
+global.Promise = require('bluebird');
+
 import http from 'http';
 import config from './env/development';
 import express from './core/express';

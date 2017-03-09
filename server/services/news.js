@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import axios from 'axios';
-import Promise from 'bluebird';
 
 const SERVER_URL = 'https://hacker-news.firebaseio.com/v0';
 const PAGE_SIZE = 15;
