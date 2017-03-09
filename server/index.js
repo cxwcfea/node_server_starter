@@ -1,9 +1,9 @@
-global.Promise = require('bluebird');
-
 import http from 'http';
 import config from './core/config';
 import express from './core/express';
 import connectMongo from './utils/mongodb';
+
+global.Promise = require('bluebird');
 
 function startServer() {
   global.serverContext = {
