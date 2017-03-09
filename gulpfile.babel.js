@@ -1,6 +1,12 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import nodemon from 'gulp-nodemon';
+import mocha from 'gulp-mocha';
+
+gulp.task('test', () => gulp.src(['test/src/**/*.js'], { read: false })
+    .pipe(mocha({
+      compilers: ['js:babel-core/register'],
+    })));
 
 gulp.task('nodemon', () => {
   nodemon({

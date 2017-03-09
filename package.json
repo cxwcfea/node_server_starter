@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --compilers js:babel-core/register test/src/**/*.js"
   },
   "keywords": [],
   "author": "cxwcfea",
@@ -36,6 +36,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-es2017": "^6.22.0",
+    "chai": "^3.5.0",
     "eslint": "^3.17.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -43,6 +44,7 @@
     "eslint-plugin-react": "^6.10.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
+    "gulp-mocha": "^4.1.0",
     "gulp-nodemon": "^2.2.1"
   }
 }
