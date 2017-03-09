@@ -1,0 +1,1 @@
+The project is a starter of node server, with expressjs, mongodb integrated.
