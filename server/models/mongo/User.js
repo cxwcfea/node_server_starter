@@ -3,7 +3,7 @@ import moment from 'moment';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from '../../core/config';
-import util from '../../utils/util';
+import defaultPlugin from '../../utils/mongoosePlugin';
 
 function hashPassword(password) {
   const salt = bcrypt.genSaltSync();
@@ -54,7 +54,7 @@ userSchema.options.toJSON = {
   },
 };
 
-util.setSchemaDefault(userSchema);
+userSchema.plugin(defaultPlugin);
 
 const User = mongoose.model('User', userSchema);
 
