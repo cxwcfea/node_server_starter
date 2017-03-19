@@ -9,13 +9,11 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'public'),
-  style: path.join(__dirname, 'app/main.css'),
 };
 
 export default {
   entry: {
     app: PATHS.app,
-    style: PATHS.style,
     vendor: ['react', 'react-dom'],
   },
   resolve: {
@@ -45,7 +43,7 @@ export default {
   },
   plugins: [
     new CleanPlugin([PATHS.build]),
-    new ExtractTextPlugin('[name].[chunkhash].css'),
+    new ExtractTextPlugin('[name].[contenthash].css'),
     new HtmlWebpackPlugin({
       template: 'node_modules/html-webpack-template/index.ejs',
       title: 'My App',
