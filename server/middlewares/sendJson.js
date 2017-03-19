@@ -13,7 +13,7 @@ function sendJsonResponse(data = null, { httpCode = 200, code = 0, msg = '' } = 
   res.status(httpCode).json(result);
 }
 
-function sendJsonError(msg, code = 400, httpCode) {
+function sendJsonError(msg, httpCode = 400, code) {
   sendJsonResponse.call(this, null, { code, msg, httpCode });
 }
 

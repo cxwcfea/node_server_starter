@@ -11,8 +11,15 @@ import sendJson from '../middlewares/sendJson';
 import auth from '../core/passport';
 import util from '../utils/util';
 
+const pathSet = new Set([
+]);
+
 export default (config) => {
   const app = express();
+
+  if (process.env.NODE_ENV !== 'production') {
+    require('./webpack')(app); // eslint-disable-line
+  }
 
   app.set('json spaces', 2);
   app.set('trust proxy', config.trustProxy || false);
@@ -22,7 +29,7 @@ export default (config) => {
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.raw());
   app.use(cookieParser());
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, '../../public')));
   app.use(sendJson);
 
   serverContext.errorCode = {
@@ -35,6 +42,14 @@ export default (config) => {
   serverContext.auth = auth(app);
 
   mountRoutes(app, path.join(__dirname, '..', 'routes'), false);
+
+  app.use((req, res, next) => {
+    if (req.method === 'GET' && pathSet.has(req.path)) {
+      res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
+    } else {
+      next();
+    }
+  });
 
   app.use((req, res) => {
     res.sendJsonError('Not Found!', 404);

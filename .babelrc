@@ -1,8 +1,14 @@
 {
 	"presets": [
 		"es2015",
-		"es2017"
+		"es2017",
+		"react"
 	],
+	"env": {
+		"development": {
+			"presets": ["react-hmre"]
+		}
+	},
 	"plugins": [
 		[
 			"transform-runtime",
