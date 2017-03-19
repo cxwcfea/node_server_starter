@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
@@ -16,11 +17,11 @@ export default {
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js',
+    filename: '[name].js',
     publicPath: '/',
   },
   devServer: {
-    contentBase: PATHS.build,
+    // contentBase: PATHS.build,
     historyApiFallback: true,
     hot: true,
     inline: true,
@@ -41,6 +42,12 @@ export default {
     ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'node_modules/html-webpack-template/index.ejs',
+      title: 'Kanban app',
+      appMountId: 'app',
+      inject: false,
+    }),
     new webpack.HotModuleReplacementPlugin(),
   ],
 };
